@@ -22,6 +22,7 @@ app.get(`/api/notes`, (req, res) => {
     res.json(db);
 });
 
+
 app.post(`/api/notes`, (req, res) => {
     fs.readFile(`./db/db.json`, (err, data) => {
             if (err) {
