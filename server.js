@@ -4,7 +4,6 @@ const path = require(`path`)
 const fs = require(`fs`);
 
 
-let db = require(`./db/db.json`)
 // instantiating express & creating port
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,7 +18,7 @@ app.get(`/notes`, (req, res) => {
 });
 
 app.get(`/api/notes`, (req, res) => {
-    res.json(db);
+    res.json(require(`./db/db.json`));
 });
 
 
@@ -43,8 +42,12 @@ app.post(`/api/notes`, (req, res) => {
             } 
             console.log('Data was added to JSON file');
             });
-    });
-    res.json({msg: `done!`})
+    }).then((result)=>{
+        console.log(result)
+        res.json(require(`./db/db.json`))
+        console.log(` this is the updated json ${res.json(require(`./db/db.json`))}`)
+    })
+    
 });
 
 app.get(`*`, (req, res) => {
