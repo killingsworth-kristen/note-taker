@@ -4,7 +4,7 @@ const path = require(`path`)
 const fs = require(`fs`);
 
 
-const db = require(`./db/db.json`)
+let db = require(`./db/db.json`)
 // instantiating express & creating port
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,15 +35,17 @@ app.post(`/api/notes`, (req, res) => {
             const newData = req.body
             oldData.push(newData)
             console.log(oldData)
-        fs.writeFile(`./db/db.json`,`${JSON.stringify(oldData)}`, (err) => {
+        fs.writeFile(`./db/db.json`,`${JSON.stringify(oldData)}`, (err, data) => {
             if (err) {
                 console.log(err)
                 throw err;
             } 
+            db = data
             console.log('Data was added to JSON file');
             });
     });
     res.json(db)
+    console.log(db)
 });
 
 app.get(`*`, (req, res) => {
