@@ -42,12 +42,7 @@ app.post(`/api/notes`, (req, res) => {
             } 
             console.log('Data was added to JSON file');
             });
-    }).then((result)=>{
-        console.log(result)
-        res.json(require(`./db/db.json`))
-        console.log(` this is the updated json ${res.json(require(`./db/db.json`))}`)
     })
-    
 });
 
 app.get(`*`, (req, res) => {
