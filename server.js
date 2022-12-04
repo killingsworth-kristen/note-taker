@@ -34,14 +34,22 @@ app.post(`/api/notes`, (req, res) => {
             const newData = req.body
             oldData.push(newData)
             console.log(oldData)
-        fs.writeFile(`./db/db.json`,`${JSON.stringify(oldData)}`, (err) => {
-            if (err) {
-                console.log(err)
-                throw err;
-            } 
-            console.log('Data was added to JSON file');
+
+            fs.writeFile(`./db/db.json`,`${JSON.stringify(oldData)}`, (err) => {
+                if (err) {
+                    console.log(err)
+                    throw err;
+                } 
+                    console.log('Data was added to JSON file');
+
+                    fs.readFile(`./db/db.json`, (err, data) => {
+                        const a = JSON.parse(data)
+                        console.log(a)
+                    })
+
             });
     })
+
     res.json({msg: `done!`})
 });
 
