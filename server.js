@@ -22,7 +22,6 @@ app.get(`/api/notes`, (req, res) => {
 });
 
 
-
 app.post(`/api/notes`, (req, res) => {
     fs.readFile(`./db/db.json`, (err, data) => {
             if (err) {
@@ -43,6 +42,7 @@ app.post(`/api/notes`, (req, res) => {
             console.log('Data was added to JSON file');
             });
     })
+    res.json({msg: `done!`})
 });
 
 app.get(`*`, (req, res) => {
