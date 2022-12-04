@@ -2,7 +2,7 @@
 const express = require(`express`);
 const path = require(`path`)
 const fs = require(`fs`);
-
+const { json } = require("express");
 
 // instantiating express & creating port
 const app = express();
@@ -18,7 +18,10 @@ app.get(`/notes`, (req, res) => {
 });
 
 app.get(`/api/notes`, (req, res) => {
-    res.json(require(`./db/db.json`));
+    // res.json(require(`./db/db.json`));
+    fs.readFile(`./db/db.json`, (err, data) => {
+        res.json(JSON.parse(data))
+    })
 });
 
 
